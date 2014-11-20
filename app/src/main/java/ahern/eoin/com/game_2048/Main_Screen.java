@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.GridLayout;
 import android.widget.GridView;
 import android.widget.TextView;
@@ -20,6 +22,7 @@ public class Main_Screen extends Activity {
     private GridAdapter adapter;
     private Game game;
     private ArrayList<Integer> scores;
+    private Button dosomething;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,7 +30,16 @@ public class Main_Screen extends Activity {
         setContentView(R.layout.activity_main__screen);
         myGrid = (GridView) findViewById(R.id.gridView2);
 
-        scores = new ArrayList<Integer>();
+        scores = new ArrayList<Integer>();  //testarraylist to check UI
+        scores.add(1);
+        scores.add(2);
+        scores.add(3);
+        scores.add(4);
+        scores.add(5);
+        scores.add(6);
+        scores.add(7);
+        scores.add(8);
+
         scores.add(1);
         scores.add(2);
         scores.add(3);
@@ -38,36 +50,20 @@ public class Main_Screen extends Activity {
         scores.add(8);
 
 
-
-      myGrid.setAdapter(new GridAdapter(this,scores ));
-
-
-        //draw my game grid!!!??
-        //possibly use a grid view
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+      myGrid.setAdapter(new GridAdapter(this, scores));
 
 
     }
+
+    public void doSomething(View v)
+    {
+
+        scores.set(0,20);
+        myGrid.setAdapter(new GridAdapter(this,scores ));
+
+    }
+
+
 
 
     @Override
