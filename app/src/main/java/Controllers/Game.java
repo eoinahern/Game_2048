@@ -25,10 +25,11 @@ public class Game {
     public Game()
     {
         board = new Board();
-        board.setValue(0,0,2);
-        board.setValue(1,0,2);
         boardsize = board.getsize();
         rand = new Random();
+
+        addrandom();
+        addrandom();
     }
 
 
@@ -38,35 +39,54 @@ public class Game {
 
         for(int i=0 ; i < boardsize;i++)
         {
-          row = createrow(i);
+          row = createrow(i,direction);
           if(row.isEmpty())
               continue;
 
           row = addEmpties(row,direction);
+          row = mergeLine(row, direction);
 
-          for(int j =0 ; j< boardsize;j++)
-              board.setValue(j,i,row.get(j));
 
-            //createrow
-            //addempties again!!
-            //addrows or cols to original board
+
+             //add row back into original board. need method for this
+            // as could be added horizontally or vertically
+
+           addToBoard(i,direction,row);
+
+           row = createrow(i,direction);
+           row = addEmpties(row,direction);
+
+           addToBoard(i,direction,row);
+
 
         }
     }
 
-    private  ArrayList<Integer> createrow(int row)  //adds all non-zero entries to arraylist
+    private  ArrayList<Integer> createrow(int row,String direction)  //adds all non-zero entries to arraylist
     {
 
         //need to cater for up and down also here! extra for loop
-
         ArrayList<Integer> myrow = new ArrayList<Integer>();
 
-        for(int i =0; i < boardsize;i++)
+        if(direction == UP || direction == DOWN)
         {
-           if(board.getValue(i,row) !=0)
-           {
-              myrow.add( board.getValue(i,row));
-           }
+            for(int i = 0; i < boardsize; i++)
+            {
+
+                if (board.getValue(row, i) != 0) {
+                    myrow.add(board.getValue(row, i));
+                }
+            }
+
+         }
+        else
+        {
+            for (int i = 0; i < boardsize; i++)
+            {
+                if (board.getValue(i, row) != 0) {
+                    myrow.add(board.getValue(i, row));
+                }
+            }
         }
 
         return myrow;
@@ -81,11 +101,11 @@ public class Game {
 
        for(int i =0; i < boardsize; i++)
        {
-         if(direction == LEFT && i > row.size() -1)
+         if((direction == LEFT || direction == UP) && i > row.size() -1)
          {
             row.add(0);
          }
-         else if(direction == RIGHT  && i <= numzeros -1)
+         else if((direction == RIGHT || direction == DOWN) && i <= numzeros -1)
          {
             row.add(i,0) ;
          }
@@ -100,12 +120,33 @@ public class Game {
     {
 
         //merge values in the line
-        if(direction == LEFT )
+        if(direction == LEFT  || direction == UP)
         {
+            for(int i = 0; i < boardsize; i += 2)
+            {
+                int first = row.get(i);
+                int sec = row.get(i + 1) ;
 
+                if(first == sec && first != 0)
+                {
+                    row.set(i, first * 2);
+                    row.set(i+ 1, 0);
+                }
+            }
         }
-        else if(direction == RIGHT )
+        else if(direction == RIGHT || direction == DOWN )
         {
+            for(int i = boardsize - 1; i>=0; i -= 2)
+            {
+               int first = row.get(i);
+               int sec = row.get(i-1) ;
+
+                if(first == sec && first != 0)
+                {
+                    row.set(i, first * 2);
+                    row.set(i - 1, 0);
+                }
+            }
 
         }
 
@@ -113,8 +154,61 @@ public class Game {
 
     }
 
+    public void addToBoard(int position, String direction,ArrayList<Integer> row)
+    {
+
+        if(direction == UP || direction == DOWN)
+        {
+            for(int j =0 ; j < boardsize;j++) {
+                board.setValue(position, j,row.get(j));
+            }
+
+        }
+        else
+        {
+            for(int j =0 ; j < boardsize;j++) {
+                board.setValue(j, position,row.get(j));
+            }
 
 
+        }
+    }
+
+
+    public ArrayList<Integer> convertToArrLst()
+    {
+       //get all values from board to us to set adapter
+
+        ArrayList<Integer> convert2d = new ArrayList<Integer>();
+
+        for(int i =0; i < boardsize;i++)
+        {
+            for(int j=0; j < boardsize;j++)
+            {
+                convert2d.add(board.getValue(j,i));
+            }
+        }
+
+        return convert2d;
+    }
+
+    public void convertToBoard(ArrayList<Integer> addarray)
+    {
+
+        //add values back to the the board
+
+        for(int i =0; i < boardsize;i++)
+        {
+            for(int j=0; j < boardsize;j++)
+            {
+               int tempval = addarray.get((i * boardsize) + j);
+               board.setValue(j, i, tempval);
+            }
+        }
+
+
+
+    }
 
 
     public Board getboard()

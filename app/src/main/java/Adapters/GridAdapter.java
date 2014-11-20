@@ -64,7 +64,10 @@ public class GridAdapter extends BaseAdapter {
         }
 
         int score = scores.get(i);
-        v.score.setText(String.valueOf(score));
+
+
+        if(score != 0)
+           v.score.setText(String.valueOf(score));
 
         return view;
     }

@@ -22,46 +22,59 @@ public class Main_Screen extends Activity {
     private GridAdapter adapter;
     private Game game;
     private ArrayList<Integer> scores;
-    private Button dosomething;
+    private Button up;
+    private Button down;
+    private Button left;
+    private Button right;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main__screen);
         myGrid = (GridView) findViewById(R.id.gridView2);
-
-        scores = new ArrayList<Integer>();  //testarraylist to check UI
-        scores.add(1);
-        scores.add(2);
-        scores.add(3);
-        scores.add(4);
-        scores.add(5);
-        scores.add(6);
-        scores.add(7);
-        scores.add(8);
-
-        scores.add(1);
-        scores.add(2);
-        scores.add(3);
-        scores.add(4);
-        scores.add(5);
-        scores.add(6);
-        scores.add(7);
-        scores.add(8);
+        up = (Button) findViewById(R.id.upbtn);
+        down = (Button) findViewById(R.id.downbtn);
+        left= (Button)  findViewById(R.id.leftbtn);
+        right  =(Button)  findViewById(R.id.rightbtn);
 
 
-      myGrid.setAdapter(new GridAdapter(this, scores));
-
-
+        game = new Game();
+        scores = game.convertToArrLst();
+        myGrid.setAdapter(new GridAdapter(this, scores));
     }
 
-    public void doSomething(View v)
+    public void up(View v)   //I am going to change this to handle swipes  of course!! :)
+    {                         // and obviously i can get the button name from the view
+        game.makeMove("UP");
+        scores = game.convertToArrLst();
+        myGrid.setAdapter(new GridAdapter(this, scores));
+    }
+
+    public void down(View v)
     {
-
-        scores.set(0,20);
-        myGrid.setAdapter(new GridAdapter(this,scores ));
+        game.makeMove("DOWN");
+        scores = game.convertToArrLst();
+        myGrid.setAdapter(new GridAdapter(this, scores));
 
     }
+
+    public void left(View v)
+    {
+        game.makeMove("LEFT");
+        scores = game.convertToArrLst();
+        myGrid.setAdapter(new GridAdapter(this, scores));
+    }
+
+    public void right(View v)
+    {
+        game.makeMove("RIGHT");
+        scores = game.convertToArrLst();
+        myGrid.setAdapter(new GridAdapter(this, scores));
+    }
+
+
 
 
 

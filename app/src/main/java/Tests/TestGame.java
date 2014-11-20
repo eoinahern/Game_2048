@@ -32,14 +32,17 @@ import Models.Board;
 
             int [][] testboard = board.getSquares();
 
-            assertEquals(testboard[0][0] , 0);
+            assertEquals(testboard[0][0] ,0);
             assertEquals(testboard[0][1], 0);
-            assertEquals(testboard[0][2] ,2);
-            assertEquals(testboard[0][3], 2);
+            assertEquals(testboard[0][2] ,0);
+            assertEquals(testboard[0][3], 4);
+            assertEquals(testboard[1][3], 16);
+
+
 
         }
 
-    public void test_addempties()
+   /* public void test_addempties()
     {
         ArrayList<Integer> testlist = new ArrayList<Integer>();
         testlist.add(2);
@@ -53,7 +56,7 @@ import Models.Board;
 
     public void test_countrandom()
     {
-        /*on board creation count number of instances of 2 on the initialised board. should be 2 :)*/
+
 
        Board testboard = game.getboard();
        int [][] squares = testboard.getSquares();
@@ -69,7 +72,7 @@ import Models.Board;
         }
 
         assertEquals(2, count);
-    }
+    }  */
 
 
 }
