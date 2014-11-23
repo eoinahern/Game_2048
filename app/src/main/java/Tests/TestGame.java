@@ -24,7 +24,7 @@ import Models.Board;
             game = new Game();
         }
 
-        public void test_getrow() //initialization test. wont work when game is complete. added dummy values to first 2 squares initially
+      /*  public void test_getrow() //initialization test. wont work when game is complete. added dummy values to first 2 squares initially
         {
             game.makeMove("RIGHT");
             Board board = game.getboard();
@@ -41,7 +41,7 @@ import Models.Board;
 
 
         }
-
+*/
    /* public void test_addempties()
     {
         ArrayList<Integer> testlist = new ArrayList<Integer>();
@@ -73,6 +73,39 @@ import Models.Board;
 
         assertEquals(2, count);
     }  */
+
+    public void test_addempties()
+    {
+       Game game2 = new Game();
+       int count = 0;
+
+        game2.addrandom();
+        game2.addrandom();
+
+
+       int board [][]  = game2.getboard().getSquares();
+
+        for(int i = 0; i< 4;i++)
+        {
+           for(int j = 0;j < 4;j++)
+           {
+              if(board[i][j] != 0)
+              {
+                  count++;
+              }
+           }
+        }
+        Log.e("count :" , String.valueOf(count));
+        assertEquals(6,count);
+    }
+
+    public void test_numempties()
+    {
+       Game game3 = new Game();
+       Board board = game.getboard();
+
+       assertEquals(12,board.getEmptiesList().size());
+    }
 
 
 }

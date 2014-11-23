@@ -28,8 +28,15 @@ public class Game {
         boardsize = board.getsize();
         rand = new Random();
 
-        addrandom();
-        addrandom();
+
+       board.setValue(0,0,2);
+       board.setValue(1,0,2);
+       board.setValue(2,0,2);
+       board.setValue(0,1,2);
+
+
+       // addrandom();
+       // addrandom();
     }
 
 
@@ -39,27 +46,20 @@ public class Game {
 
         for(int i=0 ; i < boardsize;i++)
         {
-          row = createrow(i,direction);
+          row = createrow(i,direction); // this can be done using a count and index
           if(row.isEmpty())
               continue;
 
-          row = addEmpties(row,direction);
           row = mergeLine(row, direction);
-
-
-
-             //add row back into original board. need method for this
-            // as could be added horizontally or vertically
+          addToBoard(i,direction,row);
+          row = createrow(i,direction);
 
            addToBoard(i,direction,row);
 
-           row = createrow(i,direction);
-           row = addEmpties(row,direction);
-
-           addToBoard(i,direction,row);
-
-
+           //addrandom();  in the for loop you twat!!!
         }
+
+        addrandom();
     }
 
     private  ArrayList<Integer> createrow(int row,String direction)  //adds all non-zero entries to arraylist
@@ -68,29 +68,31 @@ public class Game {
         //need to cater for up and down also here! extra for loop
         ArrayList<Integer> myrow = new ArrayList<Integer>();
 
-        if(direction == UP || direction == DOWN)
-        {
-            for(int i = 0; i < boardsize; i++)
-            {
+        if(direction == UP || direction == DOWN) {
+            for (int i = 0; i < boardsize; i++) {
 
-                if (board.getValue(row, i) != 0) {
+                if(board.getValue(row, i ) !=0)
                     myrow.add(board.getValue(row, i));
-                }
             }
 
-         }
+        }
         else
         {
             for (int i = 0; i < boardsize; i++)
             {
-                if (board.getValue(i, row) != 0) {
+                if(board.getValue(i,row) != 0)
                     myrow.add(board.getValue(i, row));
-                }
             }
         }
 
+
+        myrow = addEmpties(myrow, direction);
+
+
         return myrow;
+
     }
+
 
     public  ArrayList<Integer> addEmpties(ArrayList<Integer> row,String direction) //adds trailing/leading empty board entries
     {
@@ -122,7 +124,7 @@ public class Game {
         //merge values in the line
         if(direction == LEFT  || direction == UP)
         {
-            for(int i = 0; i < boardsize; i += 2)
+            for(int i = 0; i < boardsize -1; i++)
             {
                 int first = row.get(i);
                 int sec = row.get(i + 1) ;
@@ -136,7 +138,7 @@ public class Game {
         }
         else if(direction == RIGHT || direction == DOWN )
         {
-            for(int i = boardsize - 1; i>=0; i -= 2)
+            for(int i = boardsize - 1; i>=1; i --)
             {
                int first = row.get(i);
                int sec = row.get(i-1) ;
@@ -230,15 +232,21 @@ public class Game {
     }
 
 
-    private void addrandom()
+    public void addrandom()
     {
         ArrayList<int[]> emptieslist = board.getEmptiesList();
+        board.showBoardLog();
+        Log.e("number of empties on board : ", String.valueOf(emptieslist.size()));
         int size = emptieslist.size();
         int index = rand.nextInt(size);
+        Log.e("random index value : ", String.valueOf(index));
         int [] position = emptieslist.get(index);
 
-        int y = position[0];
-        int x = position[1];
+        Log.e("position of x :", String.valueOf(position[0]));
+        Log.e("position of y :", String.valueOf(position[1]));
+
+        int x = position[0];
+        int y = position[1];
 
         board.setValue(x,y,2);
     }

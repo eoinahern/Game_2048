@@ -2,6 +2,7 @@ package ahern.eoin.com.game_2048;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -47,6 +48,7 @@ public class Main_Screen extends Activity {
 
     public void up(View v)   //I am going to change this to handle swipes  of course!! :)
     {                         // and obviously i can get the button name from the view
+
         game.makeMove("UP");
         scores = game.convertToArrLst();
         myGrid.setAdapter(new GridAdapter(this, scores));
