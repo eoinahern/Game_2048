@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="square">#858287</color>
+    <color name="square1">#e2e0da</color>
+    <color name="square2">#f8e49b</color>
+    <color name="square3">#fd8e44</color>
+    <color name="square4">#fd7012</color>
+    <color name="square5">#f97777</color>
+    <color name="square6">#ed0202</color>
+    <color name="square7">#fde64e</color>
+    <color name="square8">#fde12b</color>
+    <color name="square9">#f46106</color>
+    <color name="square10">#88e9fc</color>
+    <color name="square11">#60c7fb</color>
+    <color name="square12">#608cfb</color>
+    <color name="square13">#cf60fb</color>
+
+</resources>

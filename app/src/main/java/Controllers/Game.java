@@ -28,15 +28,8 @@ public class Game {
         boardsize = board.getsize();
         rand = new Random();
 
-
-       board.setValue(0,0,2);
-       board.setValue(1,0,2);
-       board.setValue(2,0,2);
-       board.setValue(0,1,2);
-
-
-       // addrandom();
-       // addrandom();
+        addrandom();
+        addrandom();
     }
 
 
@@ -207,9 +200,6 @@ public class Game {
                board.setValue(j, i, tempval);
             }
         }
-
-
-
     }
 
 
@@ -235,16 +225,9 @@ public class Game {
     public void addrandom()
     {
         ArrayList<int[]> emptieslist = board.getEmptiesList();
-        board.showBoardLog();
-        Log.e("number of empties on board : ", String.valueOf(emptieslist.size()));
         int size = emptieslist.size();
         int index = rand.nextInt(size);
-        Log.e("random index value : ", String.valueOf(index));
         int [] position = emptieslist.get(index);
-
-        Log.e("position of x :", String.valueOf(position[0]));
-        Log.e("position of y :", String.valueOf(position[1]));
-
         int x = position[0];
         int y = position[1];
 
