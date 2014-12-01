@@ -3,21 +3,20 @@ package ahern.eoin.com.game_2048;
 import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.GestureDetector;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
-import android.widget.GridLayout;
 import android.widget.GridView;
-import android.widget.TextView;
-
 import java.util.ArrayList;
-
 import Adapters.GridAdapter;
 import Controllers.Game;
+import Utils.GestureListener;
 
 
-public class Main_Screen extends Activity {
+public class Main_Screen extends Activity{
 
     private GridView myGrid;
     private GridAdapter adapter;
@@ -27,6 +26,7 @@ public class Main_Screen extends Activity {
     private Button down;
     private Button left;
     private Button right;
+    private GestureDetector detector;
 
 
     @Override
@@ -35,18 +35,60 @@ public class Main_Screen extends Activity {
 
         setContentView(R.layout.activity_main__screen);
         myGrid = (GridView) findViewById(R.id.gridView2);
-        up = (Button) findViewById(R.id.upbtn);
+        detector = new GestureDetector(this,new GestureListener());
+
+        /*up = (Button) findViewById(R.id.upbtn);
         down = (Button) findViewById(R.id.downbtn);
         left= (Button)  findViewById(R.id.leftbtn);
-        right  =(Button)  findViewById(R.id.rightbtn);
-
+        right  =(Button)  findViewById(R.id.rightbtn);*/
 
         game = new Game();
         scores = game.convertToArrLst();
         myGrid.setAdapter(new GridAdapter(this, scores));
     }
 
-    public void up(View v)   //I am going to change this to handle swipes  of course!! :)
+    @Override
+    public boolean onTouchEvent(MotionEvent event)
+    {
+        boolean  consumed =  detector.onTouchEvent(event);
+        String direction = GestureListener.direction;
+
+        if(direction != "" && consumed == true)
+        {
+           handleSwipe(direction);
+        }
+
+        return super.onTouchEvent(event);
+    }
+
+
+    public void handleSwipe(final String direction)
+    {
+
+
+       Thread thread = new Thread(new Runnable() {
+
+
+           @Override
+           public void run() {
+               game.makeMove(direction);
+           }
+       });
+
+        thread.start();
+
+        try {
+            thread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+
+        scores = game.convertToArrLst();
+        myGrid.setAdapter(new GridAdapter(this, scores));
+    }
+
+   /* public void up(View v)   //I am going to change this to handle swipes  of course!! :)
     {                         // and obviously i can get the button name from the view
 
         game.makeMove("UP");
@@ -74,8 +116,7 @@ public class Main_Screen extends Activity {
         game.makeMove("RIGHT");
         scores = game.convertToArrLst();
         myGrid.setAdapter(new GridAdapter(this, scores));
-    }
-
+    }*/
 
 
 

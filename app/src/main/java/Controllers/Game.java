@@ -36,7 +36,6 @@ public class Game {
     public void makeMove(String direction)  //move numbers in board
     {
         ArrayList<Integer>  row = new ArrayList<Integer>();
-
         for(int i=0 ; i < boardsize;i++)
         {
           row = createrow(i,direction); // this can be done using a count and index
@@ -48,11 +47,10 @@ public class Game {
           row = createrow(i,direction);
 
            addToBoard(i,direction,row);
-
-           //addrandom();  in the for loop you twat!!!
-        }
+         }
 
         addrandom();
+        Log.e("random","random added!!!");
     }
 
     private  ArrayList<Integer> createrow(int row,String direction)  //adds all non-zero entries to arraylist
@@ -106,7 +104,7 @@ public class Game {
          }
         }
 
-        Log.d("row :  ", row.toString());
+        //Log.d("row :  ", row.toString());
 
         return row;
     }

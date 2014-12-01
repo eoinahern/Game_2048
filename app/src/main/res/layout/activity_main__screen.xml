@@ -18,7 +18,7 @@
             android:layout_alignParentTop="true"
             android:numColumns="4"/>
 
-    <Button
+   <!--<Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="up"
@@ -56,7 +56,7 @@
         android:onClick="right"
         android:layout_toEndOf="@+id/leftbtn"
         android:layout_alignParentBottom="true"
-        android:layout_toRightOf="@+id/leftbtn" />
+        android:layout_toRightOf="@+id/leftbtn" />-->
 
 
 </RelativeLayout>
