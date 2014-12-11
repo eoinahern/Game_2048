@@ -23,9 +23,6 @@ public class GestureListener extends GestureDetector.SimpleOnGestureListener {
         @Override
         public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY)
         {
-
-            float x1= e1.getRawX();
-            float x2 = e2.getRawX();
             float mindist = 350;
 
 

@@ -2,12 +2,10 @@ package ahern.eoin.com.game_2048;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.GestureDetector;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
-import android.view.View;
 import android.widget.Button;
 import android.widget.GridView;
 import java.util.ArrayList;
@@ -22,10 +20,6 @@ public class Main_Screen extends Activity{
     private GridAdapter adapter;
     private Game game;
     private ArrayList<Integer> scores;
-    private Button up;
-    private Button down;
-    private Button left;
-    private Button right;
     private GestureDetector detector;
 
 
@@ -37,10 +31,6 @@ public class Main_Screen extends Activity{
         myGrid = (GridView) findViewById(R.id.gridView2);
         detector = new GestureDetector(this,new GestureListener());
 
-        /*up = (Button) findViewById(R.id.upbtn);
-        down = (Button) findViewById(R.id.downbtn);
-        left= (Button)  findViewById(R.id.leftbtn);
-        right  =(Button)  findViewById(R.id.rightbtn);*/
 
         game = new Game();
         scores = game.convertToArrLst();
@@ -65,6 +55,8 @@ public class Main_Screen extends Activity{
     public void handleSwipe(final String direction)
     {
 
+       ///if(game.GameOver())
+          /// show game over alert
 
        Thread thread = new Thread(new Runnable() {
 
@@ -83,41 +75,9 @@ public class Main_Screen extends Activity{
             e.printStackTrace();
         }
 
-
         scores = game.convertToArrLst();
         myGrid.setAdapter(new GridAdapter(this, scores));
     }
-
-   /* public void up(View v)   //I am going to change this to handle swipes  of course!! :)
-    {                         // and obviously i can get the button name from the view
-
-        game.makeMove("UP");
-        scores = game.convertToArrLst();
-        myGrid.setAdapter(new GridAdapter(this, scores));
-    }
-
-    public void down(View v)
-    {
-        game.makeMove("DOWN");
-        scores = game.convertToArrLst();
-        myGrid.setAdapter(new GridAdapter(this, scores));
-
-    }
-
-    public void left(View v)
-    {
-        game.makeMove("LEFT");
-        scores = game.convertToArrLst();
-        myGrid.setAdapter(new GridAdapter(this, scores));
-    }
-
-    public void right(View v)
-    {
-        game.makeMove("RIGHT");
-        scores = game.convertToArrLst();
-        myGrid.setAdapter(new GridAdapter(this, scores));
-    }*/
-
 
 
 

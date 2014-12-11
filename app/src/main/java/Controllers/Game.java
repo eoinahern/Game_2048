@@ -21,6 +21,7 @@ public class Game {
     private Board board;
     private int boardsize;
     private Random rand;
+    private int score;
 
     public Game()
     {
@@ -104,7 +105,6 @@ public class Game {
          }
         }
 
-        //Log.d("row :  ", row.toString());
 
         return row;
     }
@@ -217,6 +217,37 @@ public class Game {
           }
         }
         return false;
+    }
+
+
+    public int GetScore()
+    {
+
+        int score = 0;
+
+        for(int i = 0; i < boardsize; i++)
+        {
+            for(int j = 0; j < boardsize; j++)
+            {
+               score += board.getValue(j,i);
+            }
+        }
+
+        return score;
+    }
+
+    public boolean GameOver()
+    {
+        for(int i = 0; i < boardsize; i++)
+        {
+            for(int j = 0; j < boardsize; j++)
+            {
+                if( board.getValue(j,i) == 0)
+                    return false;
+            }
+        }
+
+        return true;
     }
 
 
