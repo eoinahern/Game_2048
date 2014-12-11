@@ -28,7 +28,7 @@ public class Game {
         board = new Board();
         boardsize = board.getsize();
         rand = new Random();
-
+        score = 0;
         addrandom();
         addrandom();
     }
@@ -220,20 +220,15 @@ public class Game {
     }
 
 
-    public int GetScore()
+    public void SetScore(int scorein)
     {
+        score = scorein;
+    }
 
-        int score = 0;
 
-        for(int i = 0; i < boardsize; i++)
-        {
-            for(int j = 0; j < boardsize; j++)
-            {
-               score += board.getValue(j,i);
-            }
-        }
-
-        return score;
+     public int GetScore() //possibly a different way to score the game??
+    {
+         return score;
     }
 
     public boolean GameOver()

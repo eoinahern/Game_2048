@@ -8,6 +8,8 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.widget.Button;
 import android.widget.GridView;
+import android.widget.TextView;
+
 import java.util.ArrayList;
 import Adapters.GridAdapter;
 import Controllers.Game;
@@ -19,6 +21,8 @@ public class Main_Screen extends Activity{
     private GridView myGrid;
     private GridAdapter adapter;
     private Game game;
+    private int score;
+    private TextView scoreview;
     private ArrayList<Integer> scores;
     private GestureDetector detector;
 
@@ -29,6 +33,8 @@ public class Main_Screen extends Activity{
 
         setContentView(R.layout.activity_main__screen);
         myGrid = (GridView) findViewById(R.id.gridView2);
+        scoreview = (TextView) findViewById(R.id.textView2);
+
         detector = new GestureDetector(this,new GestureListener());
 
 
@@ -77,6 +83,7 @@ public class Main_Screen extends Activity{
 
         scores = game.convertToArrLst();
         myGrid.setAdapter(new GridAdapter(this, scores));
+        scoreview.setText(String.valueOf(game.GetScore()));
     }
 
 
