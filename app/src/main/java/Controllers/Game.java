@@ -122,6 +122,7 @@ public class Game {
 
                 if(first == sec && first != 0)
                 {
+                    updateScore(first,sec);
                     row.set(i, first * 2);
                     row.set(i+ 1, 0);
                 }
@@ -136,6 +137,7 @@ public class Game {
 
                 if(first == sec && first != 0)
                 {
+                    updateScore(first,sec);
                     row.set(i, first * 2);
                     row.set(i - 1, 0);
                 }
@@ -162,8 +164,6 @@ public class Game {
             for(int j =0 ; j < boardsize;j++) {
                 board.setValue(j, position,row.get(j));
             }
-
-
         }
     }
 
@@ -206,7 +206,7 @@ public class Game {
         return board;
     }
 
-    public boolean checkWin()
+    public boolean checkWin()   //my not use this as we cn just allow player to continue playing
     {
         for(int i =0; i < boardsize;i++)
         {
@@ -225,10 +225,26 @@ public class Game {
         score = scorein;
     }
 
-
-     public int GetScore() //possibly a different way to score the game??
+    private void updateScore(int num1, int num2)  // called when move is made and two or more squares combine
     {
-         return score;
+       score += num1 + num2;
+    }
+
+
+    public int GetScore() //possibly a different way to score the game??
+    {
+        //score = 0;
+
+        /*for(int i = 0; i < boardsize; i++)
+        {
+            for(int j = 0; j < boardsize; j++)
+            {
+                if( board.getValue(j,i) > 2)
+                    score += board.getValue(j,i);
+            }
+        }*/
+
+        return score;
     }
 
     public boolean GameOver()

@@ -6,6 +6,7 @@ import android.view.GestureDetector;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
+import android.view.View;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.TextView;
@@ -25,6 +26,8 @@ public class Main_Screen extends Activity{
     private TextView scoreview;
     private ArrayList<Integer> scores;
     private GestureDetector detector;
+    private Button restart;
+
 
 
     @Override
@@ -34,11 +37,26 @@ public class Main_Screen extends Activity{
         setContentView(R.layout.activity_main__screen);
         myGrid = (GridView) findViewById(R.id.gridView2);
         scoreview = (TextView) findViewById(R.id.textView2);
+        restart = (Button) findViewById(R.id.button);
 
         detector = new GestureDetector(this,new GestureListener());
 
 
+        restart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startGame();
+            }
+        });
+
+        startGame();
+
+    }
+
+    private void startGame()
+    {
         game = new Game();
+        scoreview.setText("Score : 0");
         scores = game.convertToArrLst();
         myGrid.setAdapter(new GridAdapter(this, scores));
     }
@@ -83,7 +101,7 @@ public class Main_Screen extends Activity{
 
         scores = game.convertToArrLst();
         myGrid.setAdapter(new GridAdapter(this, scores));
-        scoreview.setText(String.valueOf(game.GetScore()));
+        scoreview.setText("Score : " +String.valueOf(game.GetScore()));
     }
 
 
